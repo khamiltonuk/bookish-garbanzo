@@ -24,8 +24,12 @@ table {
   margin: 0 auto;
 }
 
+table.tie {
+    background: green;
+}
+
 .game-over {
-  background: grey;
+  background: rgba(255,255,255,0.8);
   width: 200px;
   height: 200px;
   text-align: center;

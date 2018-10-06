@@ -18,8 +18,33 @@ const gameBoard = document.querySelector(".game-board table");
 gameBoard.addEventListener("click", turnClick, false);
 
 function turnClick(e) {
-  console.log();
-  turn(e.target.id, huPlayer);
+  if (typeof origBoard[e.target.id] === "number") {
+    if (!checkTie()) {
+      turn(e.target.id, huPlayer);
+      turn(bestSpot(), aiPlayer);
+    }
+  }
+}
+
+function checkTie() {
+  if (emptySquares().length === 0) {
+    gameBoard.classList.add("tie");
+    pauseGame = true;
+    declareWinner("Tie game");
+  }
+}
+
+function declareWinner(message) {
+  endGameOverlay.classList.remove("hidden");
+  endGameOverlay.querySelector("h2").innerText = message;
+}
+
+function emptySquares() {
+  return origBoard.filter(s => typeof s == "number");
+}
+
+function bestSpot() {
+  return emptySquares()[0];
 }
 
 function turn(squareId, player) {
@@ -39,7 +64,7 @@ function checkWin(board, player) {
   let gameWon = null;
   for (let [index, win] of winCombos.entries()) {
     if (win.every(elem => plays.indexOf(elem) > -1)) {
-      gameWon = { index: index, player: player };
+      gameWon = { index, player };
       break;
     }
   }
@@ -57,6 +82,7 @@ function startGame() {
 }
 
 function gameOver(gameWon) {
+  declareWinner(`${gameWon.player === "O" ? "human" : "computer"} Wins`);
   for (let index of winCombos[gameWon.index]) {
     document.getElementById(index).classList.add(`winning`);
     // document.getElementById(index).classList.add(`winning-${gameWon.player}`);
