@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;2
+  box-sizing: border-box;
 }
 td {
   border-right: 2px solid #333;
@@ -25,11 +25,11 @@ table {
 }
 
 table.tie {
-    background: green;
+  background: green;
 }
 
 .game-over {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
   width: 200px;
   height: 200px;
   text-align: center;
@@ -41,7 +41,7 @@ table.tie {
 }
 
 .winning {
-    background-color: palevioletred
+  background-color: palevioletred;
 }
 .hidden {
   display: none;
